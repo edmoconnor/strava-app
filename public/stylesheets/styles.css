@@ -1,0 +1,56 @@
+p{float: left; display: inline; padding-right: 10px; font-size: 14px}
+body{margin: 0px;}
+h1{font-family: sans-serif}
+
+#map { 
+    height: 180px;
+  	width: 180px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+.angular-google-map-container {
+        height: 200px;
+        width: 400px;
+}
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+#activity{cursor: pointer;}
+
+#headerLeft{width: 50%; height: 100px; float: left; border-right: 1px solid #808080; padding: 5px; box-sizing: border-box; }
+#headerRight{width: 50%; height: 100px; float: left; padding: 5px; box-sizing: border-box; }
+#navigator{width: 100%; float: left; border-top: 1px solid #808080;}
+#mainLeft{width: 65%; height: 600px; float: left; border-right: 1px solid #808080; padding: 5px; box-sizing: border-box; overflow: auto; }
+#mainRight{width: 35%; height: 600px; float: left; padding: 5px; box-sizing: border-box; }
+
+ul.clubs {
+    list-style-type: none;
+    margin: 10;
+    padding: 0;
+    overflow: hidden;
+    width: 70px;
+    float: left;
+}
+
+li {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 70px;
+    float: left;
+    
+}
+
+
+
