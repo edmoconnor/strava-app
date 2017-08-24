@@ -6,15 +6,14 @@ var app = angular.module('myapp', ['uiGmapgoogle-maps'])
     
 })
 .controller('myCtrl', function($scope, $http, $q, Map) {
-//$scope.req1 = $http.get('myfile.json');
-//$scope.req2 = $http.get('myfile2.json');
-        $scope.init = function(stringifiedArray) {
-            var info = JSON.parse(stringifiedArray);
-            console.log('info', info);
-        
-        
-            //$scope.req1 = $http.get('../data');
-            $http.get('../data', info).then(function(res) {
+console.log('iuybiuvyiyvu')
+        //$scope.init = function(token) {
+            //var info = JSON.parse('<%= token %>');
+            //console.log("wwww")
+            //var info = token;
+            //console.log('info', info);
+
+            $http.get('../data').then(function(res) {
                 var data = JSON.parse(res.data);
                 console.log('data', data[1].activity);
                 console.log("qqqqqqqqqqqqqqqqq");
@@ -41,7 +40,7 @@ var app = angular.module('myapp', ['uiGmapgoogle-maps'])
                 };
 
             });
-        }
+        //}
         /*
         //$scope.req2 = $http.get('../activity');
         

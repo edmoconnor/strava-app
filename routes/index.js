@@ -1,15 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var strava = require('strava-v3');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log('index', req);
-  res.render('index', { user: req.user });
-  //res.render('index', { title: 'Express' });
+    if(!req.user){
+      res.redirect("/login");
+    }else{
+      console.log('index', req.user);
+      res.render('index', { user: req.user, token: token });
+    }
 });
-
-
-
 
 module.exports = router;

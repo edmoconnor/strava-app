@@ -1,18 +1,20 @@
 {
-  "name": "strav_clone",
+  "name": "strava_clone",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    //"start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "ejs-locals": "^1.0.2",
     "express": "~4.15.2",
+    "express-passport-logout": "^0.1.0",
     "express-session": "^1.0.4",
     "logger": "0.0.1",
     "morgan": "^1.0.1",

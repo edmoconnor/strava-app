@@ -2,6 +2,12 @@ p{float: left; display: inline; padding-right: 10px; font-size: 14px}
 body{margin: 0px;}
 h1{font-family: sans-serif}
 
+#loginContainer{ 
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
 #map { 
     height: 180px;
   	width: 180px;
@@ -27,8 +33,8 @@ table tr:nth-child(even) {
 
 #activity{cursor: pointer;}
 
-#headerLeft{width: 50%; height: 100px; float: left; border-right: 1px solid #808080; padding: 5px; box-sizing: border-box; }
-#headerRight{width: 50%; height: 100px; float: left; padding: 5px; box-sizing: border-box; }
+#headerLeft{width: 50%; height: 100px; float: left; border-bottom: 1px solid #808080; border-right: 1px solid #808080; padding: 5px; box-sizing: border-box; }
+#headerRight{width: 50%; height: 100px; float: left; border-bottom: 1px solid #808080; padding: 5px; box-sizing: border-box; }
 #navigator{width: 100%; float: left; border-top: 1px solid #808080;}
 #mainLeft{width: 65%; height: 600px; float: left; border-right: 1px solid #808080; padding: 5px; box-sizing: border-box; overflow: auto; }
 #mainRight{width: 35%; height: 600px; float: left; padding: 5px; box-sizing: border-box; }

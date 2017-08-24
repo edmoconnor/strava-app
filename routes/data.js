@@ -4,17 +4,36 @@ var strava = require('strava-v3');
 var polyline = require('polyline');
 	
 router.get('/', function(req, res, next) {
-	var uid = req.query.query;
-	console.log('iidddddddddddd', uid);
+	var token = req.query.token;
+	var id = req.query.id;
+	
+	var tokenString= [];
+	for (var key in token) {
+		tokenString.push(token[key])
+	}
+	
+	var stravaToken = tokenString.join("");
+	var stravaId = parseInt(id);
 
-	strava.athlete.get({},function(err,athlete) {
-		var data = [];
-		if(!err) {
-			data.push({athlete: athlete})
-			console.log(data)
-			strava.athlete.listActivities({},function(err,activity) {
+	var data = [];
+
+	var getAthlete = function() {
+		var promise = new Promise(function(resolve, reject){
+			strava.athlete.get({'access_token':stravaToken},function(err,athlete) {	
 				if(!err) {
-					//console.log(JSON.stringify(activity[0].map.summary_polyline));
+					data.push({athlete: athlete})
+				}
+				resolve(data)
+				console.log(data)
+			});
+		});
+		return promise;
+	};
+
+	var getActivities = function(data) {
+		var promise = new Promise(function(resolve, reject){
+			strava.athlete.listActivities({'access_token':stravaToken},function(err,activity) {
+				if(!err) {
 					for(var i = 0; i < activity.length; i++){
 						var line = polyline.decode(JSON.stringify(activity[i].map.summary_polyline));
 						var coords = [];
@@ -27,37 +46,44 @@ router.get('/', function(req, res, next) {
 					}
 					
 					data.push({activity: activity});
-					strava.athletes.stats({}, function(err, stats){
-						//console.log('ddddddddddddddddddddddddddddd', activity[0].map.summary_polyline);
-						
-						if(!err){
-							data.push({stats: stats});
-							strava.segments.get({}, function(err, segments){
-								if(!err){
-									//console.log(segments);
-									data.push({segments: segments});
-									res.json(JSON.stringify(data));
-								}
-								else {
-									console.log(err)
-								}
-							})
-						}
-						else {
-							console.log(err);
-						}
-					})
+					resolve(data)
+					console.log(data)
 				}
-				else {
-					console.log(err);
+			});
+		});
+		return promise;
+	};
+	
+	var getStats = function(data) {
+		var promise = new Promise(function(resolve, reject){
+			strava.athletes.stats({'access_token':stravaToken, id:stravaId}, function(err, stats){
+				if(!err){
+					data.push({stats: stats});
+					//resolve(data);
+					res.json(JSON.stringify(data));
+					console.log(data)
 				}
-			})
-		}
-		else {
-			console.log(err);
-		}
-	});
+			});
+		});
+		return promise;
+	};
 
-});
+	var getSegments = function(){
+		var promise = new Promise(function(resolve, reject){
+			strava.segments.get({'access_token':stravaToken}, function(err, segments){
+				if(!err){
+					console.log(segments);
+					data.push({segments: segments});
+				}			
+			})
+		})
+	};
+	
+	getAthlete()
+	.then(getActivities)
+	.then(getStats);
+	//.then(getSegments);
+
+	});
 
 module.exports = router;
