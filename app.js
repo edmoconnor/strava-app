@@ -5,6 +5,7 @@ var path = require('path');
 var index = require('./routes/index');
 var data = require('./routes/data');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var passport = require('passport');
 var StravaStrategy = require('passport-strava').Strategy;
 
@@ -44,6 +45,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/data', data);
 
 app.get('/auth/strava',
@@ -56,20 +58,11 @@ app.get('/auth/strava',
 app.get('/auth/strava/callback', 
   passport.authenticate('strava', { failureRedirect: '/login' }),
   function(req, res) {
-    var str = JSON.stringify(req.user)
     res.render('index', {user: req.user, token: token});
   });
 
-app.get('/logout', function(req, res){
-  console.log("logout");
-  req.logout();
-  delete req.session
-  res.redirect('/');
-});
-
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  //console.log(req)
   res.redirect('/login')
 };
 
