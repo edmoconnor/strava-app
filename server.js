@@ -9,7 +9,7 @@ var logout = require('./routes/logout');
 var passport = require('passport');
 var StravaStrategy = require('passport-strava').Strategy;
 
-var app = express();
+var server = express();
 
 passport.serializeUser(function(user, cb) {
   cb(null, user);
@@ -34,28 +34,28 @@ passport.use(new StravaStrategy({
   }
 ));
 
-app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.use('/auth/strava',express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+server.set('views', path.join(__dirname, 'views'));
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.use('/auth/strava',express.static(path.join(__dirname, 'public')));
+server.use(express.static(path.join(__dirname, 'public')));
 
-app.use(passport.initialize());
-app.use(passport.session());
+server.use(passport.initialize());
+server.use(passport.session());
 
-app.use('/', index);
-app.use('/login', login);
-app.use('/logout', logout);
-app.use('/data', data);
+server.use('/', index);
+server.use('/login', login);
+server.use('/logout', logout);
+server.use('/data', data);
 
-app.get('/auth/strava',
+server.get('/auth/strava',
   passport.authenticate('strava', { scope: ['public'] }),
   function(req, res){
     // The request will be redirected to Strava for authentication, so this
     // function will not be called.
   });
 
-app.get('/auth/strava/callback', 
+server.get('/auth/strava/callback', 
   passport.authenticate('strava', { failureRedirect: '/login' }),
   function(req, res) {
     res.render('index', {user: req.user, token: token});
@@ -67,7 +67,7 @@ function ensureAuthenticated(req, res, next) {
 };
 
 // error handler
-app.use(function(err, req, res, next) {
+server.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -78,4 +78,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = server;
