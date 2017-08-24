@@ -22,7 +22,7 @@
     "node": "6.11.0"
   },
   "description": "strava clone node & angular",
-  "main": "srver.js",
+  "main": "server.js",
   "devDependencies": {},
   "author": "Ed O'Connor",
   "license": "ISC"
