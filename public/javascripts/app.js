@@ -32,10 +32,10 @@ var app = angular.module('myapp', ['ngMap'])
                 for(var i = 1; i < polypath.path.length; i++){
                     path.push([polypath.path[i][1], polypath.path[i][0]])
                 }
-                var positions = path;
+                
                 var bounds = new google.maps.LatLngBounds();
-                for (var i=0; i<positions.length; i++) {
-                    var latlng = new google.maps.LatLng(positions[i][0], positions[i][1]);
+                for (var i=0; i<path.length; i++) {
+                    var latlng = new google.maps.LatLng(path[i][0], path[i][1]);
                     bounds.extend(latlng);
                 }
 
