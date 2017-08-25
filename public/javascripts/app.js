@@ -1,6 +1,6 @@
-var app = angular.module('myapp', ['uiGmapgoogle-maps'])
+var app = angular.module('myapp', ['ngMap'])
 
-.controller('myCtrl', function($scope, $http) {
+.controller('myCtrl', function($scope, $http, NgMap) {
 
     $scope.init = function(token, id) {
         var stravaData = {token: token, id: id}
@@ -25,21 +25,26 @@ var app = angular.module('myapp', ['uiGmapgoogle-maps'])
             
                 var obj = hours + ":" + minutes + ":" + seconds
                 return obj;
+            }
+
+            $scope.polypath = function(polypath){
+                var path = [];
+                for(var i = 1; i < polypath.path.length; i++){
+                    path.push([polypath.path[i][1], polypath.path[i][0]])
                 }
-            
-            $scope.models = [];
-            $scope.map = {
-                //id: "a945919933",
-                //resource_state: 2,
-                //summary_polyline: "youcIrdjd@_Uqd@qGyXoFrD}K`Ymc@l_@ii@|Em^d\ko@oGmQtPia@nJo\th@|[eh@ja@_KxPgRfq@vHb[i[r}@uSzGldBxOdv@l@`{B~JrTIjYjFl[tCzHtIF|KsUbUgEfCyFpJ|Bx@zq@wGbcAuOnVbKp[vSrUvFdVjSjKrElQuHjx@mJhd@xIr]_FtLaKn|@_Brc@xChj@kGzw@mCpPmOf\{C~f@x@|Sm`@bdAhf@`Nx^mStGYvFxHdHkStMrF|JiFlOpGzLaC`I`H|RyPfO~Qv\zOxSxw@ArYbFrN~j@_Cp]xMjb@rC~WwG}Z~q@mYzRkLlUsT|r@ab@duBeiAj{BkFhZ`Ex}@jRr\gD~iAe{@`wAgIhZyKxO|Vyk@hz@_wAxCalA{PuU_Fu|@fGcb@vhAyyBla@isBzTit@hLaUfY{RzZmq@gXlGmb@yCa^wMwh@~CuGyO@yYqSew@_^{PiNiQ_S`QaIkHyLfCiP{GoJlFoMsFaEvQaT}E_^bSge@mNn`@wcA|Ai|@tOs\lCiPfGow@qBecA`I_z@vI{\}I}ZtJme@nHa{@cE{NeSyI}GuWmSmU{JwYrOoXtGodAqAes@wb@nKeKrUiOaBoGsb@NcXmK{Vk@i{BwOat@sGydBdd@eq@`^jQvJhVnLpH",
-                
-                //summary_polyline: [53.2, -6.12],
-                //center: {
-                        //latitude: data[1].activity[0].start_latlng[0],
-                        //longitude: data[1].activity[0].start_latlng[1]
-                //},
-                zoom: 12
-            };
+                var positions = path;
+                var bounds = new google.maps.LatLngBounds();
+                for (var i=0; i<positions.length; i++) {
+                    var latlng = new google.maps.LatLng(positions[i][0], positions[i][1]);
+                    bounds.extend(latlng);
+                }
+
+                NgMap.getMap().then(function(map) {
+                    map.setCenter(bounds.getCenter());
+                    map.fitBounds(bounds);
+                });
+                return path;
+            }
 
         });
     }
@@ -53,8 +58,4 @@ var app = angular.module('myapp', ['uiGmapgoogle-maps'])
     }
 
 })
-.filter('secondsToDateTime', [function() {
-    return function(seconds) {
-        return new Date(1970, 0, 1).setSeconds(seconds);
-    };
-}]);
+

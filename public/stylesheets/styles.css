@@ -8,11 +8,8 @@ h1{font-family: sans-serif}
     padding: 10px;
 }
 #map { 
-    height: 180px;
-  	width: 180px;
-    margin: 20px 0;
-    border-radius: 5px;
-    border: 1px solid silver;
+    margin: 10px 0;
+    width: 100%;
 }
 .angular-google-map-container {
     height: 200px;

@@ -2,12 +2,12 @@
 <head>
 	<title>Stava Clone</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-	<script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+	<script src="//maps.googleapis.com/maps/api/js?libraries=geometry"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
 	<script src="https://code.angularjs.org/1.4.5/angular-route.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="javascripts/app.js"></script>
+	<script src="javascripts/ng-map.min.js"></script>
 	<link rel="stylesheet" href="stylesheets/styles.css">
 	<link rel="stylesheet" href="stylesheets/css/bootstrap.css">
 </head>
@@ -60,7 +60,7 @@
 							<td><b>Avg. speed</b></td>
 						</tr>			
 						<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)" >
-							<td>{{activity.start_date | date}}</td>
+							<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
 							<td>{{activity.distance/1000 | number:1}}km</td>
 							<td>{{activity.total_elevation_gain}}m</td>
 							<td>{{activity.kudos_count}}</td>
@@ -69,34 +69,18 @@
 						</tr>
 					
 						<tr ng-repeat-end ng-if="isSelected(activity)">
-							
-							<td>
-								{{activity.name}} - {{timeFormat(activity.moving_time)}}
-
-								<ui-gmap-google-map id="map"
-									
-									center="{latitude: activity.start_latlng[0], longitude: activity.start_latlng[1]}"
-									pan="map.pan"
-									zoom="map.zoom"
-									draggable="true"
-									refresh="map.refresh"
-									options="map.options"
-									events="map.events"
-									bounds="map.bounds">
-
-									<!--<ui-gmap-map-control template="polyButton.tpl.html" position="top-right" index="1" controller="mapWidgetCtrl">
-									</ui-gmap-map-control>
-
-									<ui-gmap-map-control template="clear.tpl.html" position="top-right" index="1" controller="mapWidgetCtrl">
-									</ui-gmap-map-control>-->
-
-									<ui-gmap-polylines models="ativity.map.summary_polyline" path="'path'" stroke="'activity.map.summary_polyline.strokeColor'" >
-									</ui-gmap-polylines>
-
-									<!--<ui-gmap-polyline ng-repeat="p in {{ativity.map.summary_polyline}}" path="p.path" stroke="p.strokeColor" visible="p.visible"
-									geodesic="p.geodesic" editable="p.editable" draggable="p.draggable" static="true">
-									</ui-gmap-polyline>-->
-								</ui-gmap-google-map> 
+							<td style="width: 100%">
+								{{activity.name}} 
+								<ng-map id="map" zoom="12" center="{{activity.start_latlng[0]}}, {{activity.start_latlng[1]}}" map-type-id="TERRAIN">
+									<shape name="polyline" 
+										path={{polypath(activity.map.summary_polyline)}}
+										stroke-color="#FF0000"
+										stroke-opacity="1.0"
+										stroke-weight="2"
+										draggable="true"
+										bounds="map.bounds">
+									</shape>
+								</ng-map>
 						    </td>
 						    					   						    
 					    	<td colspan="5" style="vertical-align:top">
