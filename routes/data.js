@@ -23,7 +23,11 @@ router.get('/', function(req, res, next) {
 				if(!err) {
 					data.push({athlete: athlete})
 				}
-				resolve(data)
+				else {
+					console.log(err);
+				}
+				resolve(data);
+				reject(err);
 				console.log(data)
 			});
 		});
@@ -44,11 +48,15 @@ router.get('/', function(req, res, next) {
 						//console.log(line)
 						activity[i].map.summary_polyline = {path: line, strokeColor: '#808080'};
 					}
+						
 					
-					data.push({activity: activity});
-					resolve(data)
-					console.log(data)
 				}
+				else {
+					console.log(err);
+				}
+				data.push({activity: activity});
+				resolve(data)
+				console.log(data)
 			});
 		});
 		return promise;
@@ -62,6 +70,9 @@ router.get('/', function(req, res, next) {
 					//resolve(data);
 					res.json(JSON.stringify(data));
 					console.log(data)
+				}
+				else {
+					console.log(err);
 				}
 			});
 		});
