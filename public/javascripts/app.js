@@ -9,7 +9,7 @@ var app = angular.module('myapp', ['ngMap'])
             headers : {'Accept' : 'application/json'}
         };
         
-        $http.get('/data', x).then(function(res) {
+        $http.get('/data', config).then(function(res) {
             var data = JSON.parse(res.data);
 
             $scope.data = data;

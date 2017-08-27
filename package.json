@@ -3,10 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    //local development
-    "start": "nodemon ./bin/www"
-    //heroku production
-    //"start": "node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
