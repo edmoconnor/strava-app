@@ -21,14 +21,10 @@ router.get('/', function(req, res, next) {
 		var promise = new Promise(function(resolve, reject){
 			strava.athlete.get({'access_token':stravaToken},function(err,athlete) {	
 				if(!err) {
-					data.push({athlete: athlete})
+					data.push({athlete: athlete});
+					resolve(data);
 				}
-				else {
-					console.log(err);
-				}
-				resolve(data);
 				reject(err);
-				console.log(data)
 			});
 		});
 		return promise;
@@ -39,24 +35,13 @@ router.get('/', function(req, res, next) {
 			strava.athlete.listActivities({'access_token':stravaToken},function(err,activity) {
 				if(!err) {
 					for(var i = 0; i < activity.length; i++){
-						var line = polyline.decode(JSON.stringify(activity[i].map.summary_polyline));
-						var coords = [];
-						for(var j = 0; j < line.length; j++){
-							//coords.push([latitude: line[j][0], longitude: line[j][1]])
-						}
-						//var line = {path: polyline.decode(JSON.stringify(activity[i].map.summary_polyline))};
-						//console.log(line)
+						var line = polyline.decode(JSON.stringify(activity[i].map.summary_polyline))
 						activity[i].map.summary_polyline = {path: line, strokeColor: '#808080'};
 					}
-						
-					
+					data.push({activity: activity});
+					resolve(data);
 				}
-				else {
-					console.log(err);
-				}
-				data.push({activity: activity});
-				resolve(data)
-				console.log(data)
+				reject(err);
 			});
 		});
 		return promise;
@@ -68,12 +53,9 @@ router.get('/', function(req, res, next) {
 				if(!err){
 					data.push({stats: stats});
 					//resolve(data);
-					res.json(JSON.stringify(data));
-					console.log(data)
+					res.json(JSON.stringify(data))
 				}
-				else {
-					console.log(err);
-				}
+				reject(err);
 			});
 		});
 		return promise;
