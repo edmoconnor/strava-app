@@ -83,22 +83,50 @@
 						    </td>
 						    					   						    
 					    	<td colspan="5" style="vertical-align:top">
-						    	<table>
-						    		<tr>
-						    			<td><b>Avg. Cadence</b></td> 
-			    						<td><b>Avg. HR</b></td>
-			    						<td><b>Max. HR</b> </td>
-			    						<td><b>Avg. Power</b></td>
-			    						<td><b>Max. Speed</b></td>
-			    					</tr>
-						    		<tr>
-						    			<td>{{activity.average_cadence}}rpm</td> 
-			    						<td>{{activity.average_heartrate}}bpm</td>
-			    						<td>{{activity.max_heartrate}}bpm</td> 
-			    						<td>{{activity.average_watts}}w</td> 
-			    						<td>{{activity.max_speed * 3.6 | number:1}}kmh</td> 
+						    	<table style="width: 100%">
+						    		
+						    		<tr style="width: 50%">
+						    			
+										<td><b>Avg. HR</b> {{activity.average_heartrate}}bpm</td>
+										<td><b>Max. HR</b> {{activity.max_heartrate}}bpm</td>
+									</tr>
+									<tr>
+										<td><b>Avg. Cadence</b> {{activity.average_cadence}}rpm</td> 			    						 
+										<td><b>Avg. Power</b> {{activity.average_watts}}w</td> 
+									</tr>
+									<tr>
+			    						<td><b>Max. Speed</b> {{activity.max_speed * 3.6 | number:1}}kmh</td> 
 						    		</tr>
-						    	</table>
+								</table>
+								<br>
+								<table style="width: 100%">
+									<tr>
+										<td style="width: 50%">
+											<b>Suffer score</b> {{activity.suffer_score}}
+										</td>
+										<td>
+											<b>kJ</b> {{activity.kilojoules}}
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<b>Pr's</b> {{activity.pr_count}}
+										</td>
+										<td>
+											<b>Comments</b> {{activity.comment_count}}
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<b>Eleveation gain</b> {{activity.total_elevation_gain}} m
+										</td>
+										<td>
+											<b>Elevation High</b> {{activity.elev_high}}
+										</td>
+									</tr>
+
+								</table>
+									
 							</td>
 						</tr>		
 					</table>

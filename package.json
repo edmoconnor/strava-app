@@ -12,6 +12,7 @@
     "ejs-locals": "^1.0.2",
     "express": "~4.15.2",
     "express-passport-logout": "^0.1.0",
+    "polyline": "^1.0.0",
     "passport": "^0.3.2",
     "passport-strava": "^0.2.0",
     "path": "^0.12.7",
