@@ -2,6 +2,7 @@ p{display: inline; padding-right: 10px; font-size: 14px}
 body{margin: 0px;}
 h1{font-family: sans-serif}
 
+
 #loginContainer{ 
     margin: auto;
     width: 60%;
@@ -11,14 +12,9 @@ h1{font-family: sans-serif}
     margin: 10px 0;
     width: 100%;
 }
-.angular-google-map-container {
-    height: 200px;
-    width: 400px;
-}
 table, th , td {
     border: 1px solid grey;
     border-collapse: collapse;
-    padding: 5px;
 }
 table tr:nth-child(odd) {
     background-color: #f1f1f1;
@@ -29,42 +25,27 @@ table tr:nth-child(even) {
 
 #activity{cursor: pointer;}
 
-#headerLeft{
-    width: 50%; 
-    height: 100px; 
-    float: left; 
+#headerLeft{  
+    height: 100px;
     border-bottom: 1px solid #808080; 
-    border-right: 1px solid #808080; 
-    padding: 5px; 
-    box-sizing: border-box; 
+    border-right: 1px solid #808080;  
 }
 #headerRight{
-    width: 50%; 
-    height: 100px; 
-    float: left; 
-    border-bottom: 1px solid #808080; 
-    padding: 5px; 
-    box-sizing: border-box; 
+    height: 100px;  
+    border-bottom: 1px solid #808080;   
 }
-#mainLeft{
-    width: 65%; 
+#mainLeft{ 
+    border-right: 1px solid #808080;
     height: 600px; 
-    float: left; 
-    border-right: 1px solid #808080; 
-    padding: 5px; 
-    box-sizing: border-box; 
-    overflow: auto; 
+    padding: -5px;
+    overflow: auto;  
 }
-#mainRight{
-    width: 35%; 
-    height: 600px; 
-    float: left; 
-    padding: 5px; 
-    box-sizing: border-box;
+#mainRight{ 
+    margin: 0; 
  }
 ul.clubs {
     list-style-type: none;
-    margin: 10;
+    margin: 0;
     padding: 0;
     overflow: hidden;
     width: 70px;
@@ -72,7 +53,7 @@ ul.clubs {
 }
 
 li {
-	  list-style-type: none;
+    list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
