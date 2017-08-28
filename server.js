@@ -25,9 +25,9 @@ passport.use(new StravaStrategy({
     clientID: process.env.STRAVA_CLIENT_ID,
     clientSecret: process.env.STRAVA_CLIENT_SECRET,
     //local development
-    //callbackURL: "http://127.0.0.1:3000/auth/strava/callback"
+    callbackURL: "http://127.0.0.1:3000/auth/strava/callback"
     //heroku production
-    callbackURL: "http://stravaclone01.herokuapp.com/auth/strava/callback"
+    //callbackURL: "http://stravaclone01.herokuapp.com/auth/strava/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     token = accessToken;

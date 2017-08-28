@@ -52,87 +52,87 @@
 			<div id="mainLeft" class="col-xs-12 col-sm-12 col-md-8">
 				<h2>Activities</h2>
 				<div >
-					<table class="table table-striped">
+					<table class="table table-striped" style="height: 100%" class="fixed_headers">
 						<thead>
-						<tr>
-							<th><b>Date</b></td>
-							<td><b>Distance</b></td>
-							<td><b>Elevation</b></td>
-							<td><b>Kudos</b></td>
-							<td><b>Achievements</b></td>
-							<td><b>Avg. speed</b></td>
-						</tr>	
-						</thead>		
-						<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)" >
-							<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
-							<td>{{activity.distance/1000 | number:1}}km</td>
-							<td>{{activity.total_elevation_gain}}m</td>
-							<td>{{activity.kudos_count}}</td>
-							<td>{{activity.achievement_count}}</td>
-							<td>{{activity.average_speed/1000*3600 | number:1}}kmh</td>
-						</tr>
-					
-						<tr ng-repeat-end ng-if="isSelected(activity)">
-							<td style="width: 100%">
-								{{activity.name}} 
-								<ng-map id="map" zoom="12" center="{{activity.start_latlng[0]}}, {{activity.start_latlng[1]}}" map-type-id="TERRAIN">
-									<shape name="polyline" 
-										path={{polypath(activity.map.summary_polyline)}}
-										stroke-color="#FF0000"
-										stroke-opacity="1.0"
-										stroke-weight="2"
-										bounds="map.bounds">
-									</shape>
-								</ng-map>
-						    </td>
-						    					   						    
-					    	<td colspan="5" style="vertical-align:top">
-						    	<table style="width: 100%" class = "table table-striped">
-						    		
-						    		<tr>
-						    			
-										<td><b>Avg. HR</b> {{activity.average_heartrate}}bpm</td>
-										<td><b>Max. HR</b> {{activity.max_heartrate}}bpm</td>
-									</tr>
-									<tr>
-										<td><b>Avg. Cadence</b> {{activity.average_cadence}}rpm</td> 			    						 
-										<td><b>Avg. Power</b> {{activity.average_watts}}w</td> 
-									</tr>
-									<tr>
-			    						<td><b>Max. Speed</b> {{activity.max_speed * 3.6 | number:1}}kmh</td> 
-						    		</tr>
-								</table>
-								<br>
-								<table style="width: 100%" class = "table table-striped">
-									<tr>
-										<td style="width: 50%">
-											<b>Suffer score</b> {{activity.suffer_score}}
-										</td>
-										<td>
-											<b>kJ</b> {{activity.kilojoules}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<b>Pr's</b> {{activity.pr_count}}
-										</td>
-										<td>
-											<b>Comments</b> {{activity.comment_count}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<b>Eleveation gain</b> {{activity.total_elevation_gain}} m
-										</td>
-										<td>
-											<b>Elevation High</b> {{activity.elev_high}}
-										</td>
-									</tr>
+							<tr >
+								<th><b>Date</b></td>
+								<td><b>Distance</b></td>
+								<td><b>Elevation</b></td>
+								<td><b>Kudos</b></td>
+								<td><b>Achievements</b></td>
+								<td><b>Avg. speed</b></td>
+							</tr>	
+						</thead>
+						<tbody  class="row">		
+							<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)" >
+								<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
+								<td>{{activity.distance/1000 | number:1}}km</td>
+								<td>{{activity.total_elevation_gain}}m</td>
+								<td>{{activity.kudos_count}}</td>
+								<td>{{activity.achievement_count}}</td>
+								<td>{{activity.average_speed/1000*3600 | number:1}}kmh</td>
+							</tr>
+						
+							<tr ng-repeat-end ng-if="isSelected(activity)">
+								<td class="col-sm-12 col-md-6">
+									{{activity.name}} 
+									<ng-map id="map" zoom="12" center="{{activity.start_latlng[0]}}, {{activity.start_latlng[1]}}" map-type-id="TERRAIN">
+										<shape name="polyline" 
+											path={{polypath(activity.map.summary_polyline)}}
+											stroke-color="#FF0000"
+											stroke-opacity="1.0"
+											stroke-weight="2"
+											bounds="map.bounds">
+										</shape>
+									</ng-map>
+								</td>
+																				
+								<td colspan="5" style="vertical-align:top" class="col-sm-12 col-md-6">
+									<table class = "table table-striped">
+										<tr>
+											<td><b>Avg. HR</b> {{activity.average_heartrate}}bpm</td>
+											<td><b>Max. HR</b> {{activity.max_heartrate}}bpm</td>
+										</tr>
+										<tr>
+											<td><b>Avg. Cadence</b> {{activity.average_cadence}}rpm</td> 			    						 
+											<td><b>Avg. Power</b> {{activity.average_watts}}w</td> 
+										</tr>
+										<tr>
+											<td><b>Max. Speed</b> {{activity.max_speed * 3.6 | number:1}}kmh</td> 
+										</tr>
+									</table>
+									<br>
+									<table class = "table table-striped">
+										<tr>
+											<td>
+												<b>Suffer score</b> {{activity.suffer_score}}
+											</td>
+											<td>
+												<b>kJ</b> {{activity.kilojoules}}
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>Pr's</b> {{activity.pr_count}}
+											</td>
+											<td>
+												<b>Comments</b> {{activity.comment_count}}
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<b>Eleveation gain</b> {{activity.total_elevation_gain}} m
+											</td>
+											<td>
+												<b>Elevation High</b> {{activity.elev_high}}
+											</td>
+										</tr>
 
-								</table>
-									
-							</td>
-						</tr>		
+									</table>
+										
+								</td>
+							</tr>	
+						</body>	
 					</table>
 				</div>	    				   
 			</div>
