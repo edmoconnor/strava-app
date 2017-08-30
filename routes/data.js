@@ -23,8 +23,10 @@ router.get('/', function(req, res, next) {
 				if(!err) {
 					data.push({athlete: athlete});
 					resolve(data);
+				}else{
+					reject(err);
 				}
-				reject(err);
+				
 			});
 		});
 		return promise;
@@ -40,8 +42,9 @@ router.get('/', function(req, res, next) {
 					}
 					data.push({activity: activity});
 					resolve(data);
+				}else{
+					reject(err);
 				}
-				reject(err);
 			});
 		});
 		return promise;
@@ -54,8 +57,9 @@ router.get('/', function(req, res, next) {
 					data.push({stats: stats});
 					//resolve(data);
 					res.json(JSON.stringify(data))
+				}else{
+					reject(err);
 				}
-				reject(err);
 			});
 		});
 		return promise;

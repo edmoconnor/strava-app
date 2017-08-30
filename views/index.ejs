@@ -28,43 +28,42 @@
 						{{data[0].athlete.lastname}}
 					</h1>
 				</div>
-				<div>
+				<div style="margin: 10px;">
 					<b>{{data[0].athlete.city}}</b>
 					<b>{{data[0].athlete.state}}</b>
 					<b>{{data[0].athlete.country}}</b>
 				</div>	
 			</div>
 			<div id="headerRight" class="col-md-6">
-				<a href="/logout" class="btn btn-info" role="button" style="float: right">Logout</a>
-				<div>
+				<a href="/logout" class="btn btn-info" role="button" style="float: right; margin: 10px;">Logout</a>
+				<div style="margin: 10px;">
 					<b>Followers:{{data[0].athlete.follower_count}}</b>
 					<b>Friends:{{data[0].athlete.friend_count}}</b>
 				</div>
-				<div>
+				<div style="margin: 10px;">
 					<b>FTP:{{data[0].athlete.ftp}}</b>
 					<b>Weight:{{data[0].athlete.weight}}</b>					
 				</div>
 			</div>
 		</div>
 	
-		<div id="main" class="row">	
-					
+		<div id="main" class="row">			
 			<div id="mainLeft" class="col-xs-12 col-sm-12 col-md-8">
-				<h2>Activities</h2>
-				<div >
-					<table class="table table-striped" style="height: 100%" class="fixed_headers">
-						<thead>
+				<!--<h2 style="margin: 0 0 0 10px">Activities</h2>-->
+				<div style="margin: 0 0 0 10px">
+					<table class="table table-striped">
+						<thead >
 							<tr >
-								<th><b>Date</b></td>
-								<td><b>Distance</b></td>
-								<td><b>Elevation</b></td>
-								<td><b>Kudos</b></td>
-								<td><b>Achievements</b></td>
-								<td><b>Avg. speed</b></td>
+								<th><b>Date</b></th>
+								<th><b>Distance</b></th>
+								<th><b>Elevation</b></th>
+								<th><b>Kudos</b></th>
+								<th><b>Achievements</b></th>
+								<th><b>Avg. speed</b></th>
 							</tr>	
 						</thead>
-						<tbody  class="row">		
-							<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)" >
+						<tbody class="row">		
+							<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)">
 								<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
 								<td>{{activity.distance/1000 | number:1}}km</td>
 								<td>{{activity.total_elevation_gain}}m</td>
@@ -74,7 +73,7 @@
 							</tr>
 						
 							<tr ng-repeat-end ng-if="isSelected(activity)">
-								<td class="col-sm-12 col-md-6">
+								<td class="col-sm-12 col-md-12">
 									{{activity.name}} 
 									<ng-map id="map" zoom="12" center="{{activity.start_latlng[0]}}, {{activity.start_latlng[1]}}" map-type-id="TERRAIN">
 										<shape name="polyline" 
@@ -87,8 +86,8 @@
 									</ng-map>
 								</td>
 																				
-								<td colspan="5" style="vertical-align:top" class="col-sm-12 col-md-6">
-									<table class = "table table-striped">
+								<td colspan="5">
+									<table class="table table-striped">
 										<tr>
 											<td><b>Avg. HR</b> {{activity.average_heartrate}}bpm</td>
 											<td><b>Max. HR</b> {{activity.max_heartrate}}bpm</td>
@@ -128,8 +127,7 @@
 											</td>
 										</tr>
 
-									</table>
-										
+									</table>		
 								</td>
 							</tr>	
 						</body>	
@@ -137,10 +135,10 @@
 				</div>	    				   
 			</div>
 
-			<div id="mainRight" class="col-xs-12 col-sm-12 col-md-4" >
+			<div id="mainRight" class="col-xs-12 col-sm-12 col-md-4" style="margin-left: 0px"  >
 				<h2>Totals</h2>
 				<div class="row" >
-					<table class="table table-striped" style="float: left; width: 40%; margin-left: 5px" class="col-sm-6 col-md-6">
+					<table class="table table-striped" style="float: left; width: 40%; margin-left: 15px" class="col-sm-6 col-md-6">
 						<tr>
 							<td><b>This year</b></td>
 						</tr>
@@ -157,7 +155,7 @@
 							<td>Elevation</td><td>{{data[2].stats.ytd_ride_totals.elevation_gain}}m</td>
 						</tr>				
 					</table>
-					<table class="table table-striped" style="float: left; width: 40%; margin-left: 5px" class="col-sm-6 col-md-6">
+					<table class="table table-striped" style="float: left; width: 42%; margin-left: 5px" class="col-sm-6 col-md-6">
 						<tr>
 							<td><b>Last 4 weeks</b></td>
 						</tr>
@@ -178,7 +176,7 @@
 			
 
 				<div class="row" >
-					<table class="table table-striped" style="float: left; width: 40%; margin-left: 5px" class="col-sm-6 col-md-6">
+					<table class="table table-striped" style="float: left; width: 40%; margin-left: 15px" class="col-sm-6 col-md-6">
 						<tr>
 							<td><b>All time</b></td>
 						</tr>
