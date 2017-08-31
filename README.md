@@ -7,5 +7,4 @@ Strava clone is a basic strava user and activity viewer. The app is authenticted
 Node.js, Express.js, Passport.js, EJS, Angular.js, Bootstrap, Strava API, Google maps.
 
 Bugs:
-
-# Polylines innacurate 
+    Polylines innacurate 
