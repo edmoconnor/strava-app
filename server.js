@@ -3,7 +3,9 @@ var express = require('express');
 var util = require('util');
 var path = require('path');
 var index = require('./routes/index');
-var data = require('./routes/data');
+var athlete = require('./routes/athlete');
+var activity = require('./routes/activity');
+var stats = require('./routes/stats');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var passport = require('passport');
@@ -25,9 +27,9 @@ passport.use(new StravaStrategy({
     clientID: process.env.STRAVA_CLIENT_ID,
     clientSecret: process.env.STRAVA_CLIENT_SECRET,
     //local development
-    //callbackURL: "http://127.0.0.1:3000/auth/strava/callback"
+    callbackURL: "http://127.0.0.1:3000/auth/strava/callback"
     //heroku production
-    callbackURL: "http://stravaclone01.herokuapp.com/auth/strava/callback"
+    //callbackURL: "http://stravaclone01.herokuapp.com/auth/strava/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     token = accessToken;
@@ -49,7 +51,9 @@ server.use(passport.session());
 server.use('/', index);
 server.use('/login', login);
 server.use('/logout', logout);
-server.use('/data', data);
+server.use('/athlete', athlete);
+server.use('/activity', activity);
+server.use('/stats', stats);
 
 server.get('/auth/strava',
   passport.authenticate('strava', { scope: ['public'] }),

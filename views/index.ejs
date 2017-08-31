@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<title>Stava Clone</title>
+	<title>Strava Clone</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuNatXRXqzEBCeX3PT3D9D-OoRFbShrOw&callback=initMap"
     async defer></script>
@@ -18,31 +18,32 @@
 <div ng-app="myapp" ng-controller="myCtrl">
 
 	<div id="container">
+		
 		<div ng-init="init('<%= token %>', '<%= user.id %>')"></div>
 		<div id="header" class="row">
 			<div id="headerLeft" class="col-md-6">
 				<div>
 					<h1 style="margin: 10px;">
-						<img src={{data[0].athlete.profile_medium}} alt="" height="42" width="42">
-						{{data[0].athlete.firstname}}
-						{{data[0].athlete.lastname}}
+						<img src={{athlete.profile_medium}} alt="" height="42" width="42">
+						{{athlete.firstname}}
+						{{athlete.lastname}}
 					</h1>
 				</div>
 				<div style="margin: 10px;">
-					<b>{{data[0].athlete.city}}</b>
-					<b>{{data[0].athlete.state}}</b>
-					<b>{{data[0].athlete.country}}</b>
+					<b>{{athlete.city}}</b>
+					<b>{{athlete.state}}</b>
+					<b>{{athlete.country}}</b>
 				</div>	
 			</div>
 			<div id="headerRight" class="col-md-6">
 				<a href="/logout" class="btn btn-info" role="button" style="float: right; margin: 10px;">Logout</a>
 				<div style="margin: 10px;">
-					<b>Followers:{{data[0].athlete.follower_count}}</b>
-					<b>Friends:{{data[0].athlete.friend_count}}</b>
+					<b>Followers:{{athlete.follower_count}}</b>
+					<b>Friends:{{athlete.friend_count}}</b>
 				</div>
 				<div style="margin: 10px;">
-					<b>FTP:{{data[0].athlete.ftp}}</b>
-					<b>Weight:{{data[0].athlete.weight}}</b>					
+					<b>FTP:{{athlete.ftp}}</b>
+					<b>Weight:{{athlete.weight}}</b>					
 				</div>
 			</div>
 		</div>
@@ -63,7 +64,7 @@
 							</tr>	
 						</thead>
 						<tbody class="row">		
-							<tr id="activity" ng-repeat-start="activity in data[1].activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)">
+							<tr id="activity" ng-repeat-start="activity in activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)">
 								<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
 								<td>{{activity.distance/1000 | number:1}}km</td>
 								<td>{{activity.total_elevation_gain}}m</td>
@@ -134,7 +135,7 @@
 					</table>
 				</div>	    				   
 			</div>
-
+			
 			<div id="mainRight" class="col-xs-12 col-sm-12 col-md-4" style="margin-left: 0px"  >
 				<h2>Totals</h2>
 				<div class="row" >
@@ -143,16 +144,16 @@
 							<td><b>This year</b></td>
 						</tr>
 						<tr>
-							<td>Rides</td><td>{{data[2].stats.ytd_ride_totals.count}}</td>
+							<td>Rides</td><td>{{stats.ytd_ride_totals.count}}</td>
 						</tr>
 						<tr>
-							<td>Distance</td><td>{{data[2].stats.ytd_ride_totals.distance/1000 | number:1}}km</td>
+							<td>Distance</td><td>{{stats.ytd_ride_totals.distance/1000 | number:1}}km</td>
 						</tr>
 						<tr>
-							<td>HH:MM:SS</td><td>{{timeFormat(data[2].stats.ytd_ride_totals.moving_time)}}</td>
+							<td>HH:MM:SS</td><td>{{timeFormat(stats.ytd_ride_totals.moving_time)}}</td>
 						</tr>
 						<tr>
-							<td>Elevation</td><td>{{data[2].stats.ytd_ride_totals.elevation_gain}}m</td>
+							<td>Elevation</td><td>{{stats.ytd_ride_totals.elevation_gain}}m</td>
 						</tr>				
 					</table>
 					<table class="table table-striped" style="float: left; width: 42%; margin-left: 5px" class="col-sm-6 col-md-6">
@@ -160,16 +161,16 @@
 							<td><b>Last 4 weeks</b></td>
 						</tr>
 						<tr>
-							<td>Rides</td><td>{{data[2].stats.recent_ride_totals.count}}</td>
+							<td>Rides</td><td>{{stats.recent_ride_totals.count}}</td>
 						</tr>
 						<tr>
-							<td>Distance</td><td>{{data[2].stats.recent_ride_totals.distance/1000 | number:1}}km</td>
+							<td>Distance</td><td>{{stats.recent_ride_totals.distance/1000 | number:1}}km</td>
 						</tr>
 						<tr>
-							<td>HH:MM:SS</td><td>{{timeFormat(data[2].stats.recent_ride_totals.moving_time)}}</td>
+							<td>HH:MM:SS</td><td>{{timeFormat(stats.recent_ride_totals.moving_time)}}</td>
 						</tr>
 						<tr>
-							<td>Elevation</td><td>{{data[2].stats.recent_ride_totals.elevation_gain}}m</td>
+							<td>Elevation</td><td>{{stats.recent_ride_totals.elevation_gain}}m</td>
 						</tr>					
 					</table>
 				</div>
@@ -181,16 +182,16 @@
 							<td><b>All time</b></td>
 						</tr>
 						<tr>
-							<td>Rides</td><td>{{data[2].stats.all_ride_totals.count}}</td>
+							<td>Rides</td><td>{{stats.all_ride_totals.count}}</td>
 						</tr>
 						<tr>
-							<td>Distance</td><td>{{data[2].stats.all_ride_totals.distance/1000 | number:1}}km</td>
+							<td>Distance</td><td>{{stats.all_ride_totals.distance/1000 | number:1}}km</td>
 						</tr>
 						<tr>
-							<td>HH:MM:SS</td><td>{{timeFormat(data[2].stats.all_ride_totals.moving_time)}}</td>
+							<td>HH:MM:SS</td><td>{{timeFormat(stats.all_ride_totals.moving_time)}}</td>
 						</tr>
 						<tr>
-							<td>Elevation</td><td>{{data[2].stats.all_ride_totals.elevation_gain}}m</td>
+							<td>Elevation</td><td>{{stats.all_ride_totals.elevation_gain}}m</td>
 						</tr>				
 					</table>
 				
@@ -198,7 +199,7 @@
 						<tr>
 							<td><b>Bikes</b></td>
 						</tr>
-						<tr ng-repeat="bike in data[0].athlete.bikes">
+						<tr ng-repeat="bike in athlete.bikes">
 							<td>{{bike.name}}</td>
 							<td>{{bike.distance/1000 | number:1}}km</td>
 						</tr>
@@ -208,7 +209,7 @@
 				<div style="clear: both" class="col-xs-12">
 					
 					<h2>Clubs</h2>
-					<div ng-repeat="club in data[0].athlete.clubs">			
+					<div ng-repeat="club in athlete.clubs">			
 						<ul id="clubs">
 							<li><img src={{club.profile_medium}} alt="" height="60" width="60">{{club.name}}</li>
 						</ul>				

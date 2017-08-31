@@ -8,11 +8,56 @@ var app = angular.module('myapp', ['ngMap'])
             params: stravaData,
             headers : {'Accept' : 'application/json'}
         };
+
+        var athlete = function() {
+            var promise = new Promise(function(resolve, reject){
+                $http.get('/athlete', config).then(function(res) {
+                    if(res.data) {
+                        var atlt = JSON.parse(res.data);
+                        $scope.athlete = atlt;
+                        resolve(atlt);
+                    }else{
+                        reject(err);
+                    }
+                });
+            });
+            return promise;
+        }
         
-        $http.get('/data', config).then(function(res) {
-            var data = JSON.parse(res.data);
-            $scope.data = data;
-        });
+        var activity = function (){
+            var promise = new Promise(function(resolve, reject){
+                $http.get('/activity', config).then(function(res) {
+                    if(res.data) {
+                        var actv = JSON.parse(res.data);
+                        $scope.activity = actv;
+                        resolve(actv);
+                    }else{
+                        reject(err);
+                    }
+                });
+            });
+            return promise;
+        }
+
+        var stats = function (){
+            var promise = new Promise(function(resolve, reject){
+                $http.get('/stats', config).then(function(res) {
+                    if(res.data) {
+                        var stts = JSON.parse(res.data);
+                        $scope.stats = stts;
+                        resolve(stts);
+                    }else{
+                        reject(err);
+                    }
+                });
+            });
+            return promise;
+        }
+
+        athlete()
+        .then(activity)
+        .then(stats);
+
     }
 
     $scope.timeFormat = function (secs) {
