@@ -16,7 +16,10 @@ body{
     margin: 10px 0;
     width: 100%;
 }
-
+#mainTable{
+    height: 500px; 
+    overflow: auto;
+}
 
 .table, th, td {
     border: 1px solid #ddd;       
@@ -56,9 +59,7 @@ body{
 }
 #mainLeft{ 
     border-right: 1px solid #ddd;
-    height: 500px; 
-    padding: -5px;
-    overflow: auto;
+
 }
 #mainRight{ 
     margin: 0; 

@@ -1,4 +1,4 @@
-var app = angular.module('myapp', ['ngMap'])
+var app = angular.module('myapp', ['ngMap', 'fixed.table.header'])
 
 .controller('myCtrl', function($scope, $http, NgMap) {
 
@@ -43,7 +43,7 @@ var app = angular.module('myapp', ['ngMap'])
             var promise = new Promise(function(resolve, reject){
                 $http.get('/stats', config).then(function(res) {
                     if(res.data) {
-                        var stts = JSON.parse(res.data);
+                        var stts = JSON.parse(res.data); 
                         $scope.stats = stts;
                         resolve(stts);
                     }else{
