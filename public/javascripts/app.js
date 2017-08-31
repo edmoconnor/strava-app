@@ -1,6 +1,6 @@
 var app = angular.module('myapp', ['ngMap', 'fixed.table.header'])
 
-.controller('myCtrl', function($scope, $http, NgMap) {
+.controller('mainController', function($scope, $http, NgMap) {
 
     $scope.init = function(token, id) {
         var stravaData = {token: token, id: id}
