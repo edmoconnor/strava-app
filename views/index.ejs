@@ -8,8 +8,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="javascripts/app.js"></script>
 	<script src="javascripts/ng-map.min.js"></script>
-	<link rel="stylesheet" href="stylesheets/styles.css">
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="stylesheets/styles.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="javascripts/angular-fixed-table-header/src/fixed-table-header.min.js"></script>
 </head>
@@ -56,7 +57,7 @@
 					<table class="table table-striped" style="border: 0px; margin: 0px">
 						<thead fix-head style="margin: 0 0 0 10px">
 							<tr >
-								<th ><b>Date</b></th>
+								<th><b>Date</b></th>
 								<th><b>Distance</b></th>
 								<th><b>Elevation</b></th>
 								<th><b>Kudos</b></th>
@@ -66,7 +67,7 @@
 						</thead>
 						<tbody class="row">		
 							<tr id="activity" ng-repeat-start="activity in activity" ng-click="selActivity(activity)" ng-hide="isSelected(!activity)">
-								<td>{{activity.start_date | date}} - {{timeFormat(activity.moving_time)}}</td>
+								<td>{{activity.start_date | date}} - {{activity.name}} - {{timeFormat(activity.moving_time)}}</td>
 								<td>{{activity.distance/1000 | number:1}}km</td>
 								<td>{{activity.total_elevation_gain}}m</td>
 								<td>{{activity.kudos_count}}</td>
@@ -76,7 +77,6 @@
 						
 							<tr ng-repeat-end ng-if="isSelected(activity)">
 								<td class="col-sm-12 col-md-12">
-									{{activity.name}} 
 									<ng-map id="map" zoom="12" center="{{activity.start_latlng[0]}}, {{activity.start_latlng[1]}}" map-type-id="TERRAIN">
 										<shape name="polyline" 
 											path={{polypath(activity.map.summary_polyline)}}
@@ -88,7 +88,7 @@
 									</ng-map>
 								</td>
 																				
-								<td colspan="5">
+								<td colspan="6">
 									<table class="table table-striped">
 										<tr>
 											<td><b>Avg. HR</b> {{activity.average_heartrate}}bpm</td>
@@ -138,8 +138,18 @@
 			</div>
 			
 			<div id="mainRight" class="col-xs-12 col-sm-12 col-md-4" style="margin-left: 0px">
-				<h2>Totals</h2>
+				
 				<div class="row" >
+					<div style="clear: both" class="col-xs-12">
+					
+					<h2>Clubs</h2>
+					<div ng-repeat="club in athlete.clubs">			
+							<ul id="clubs">
+								<li><img src={{club.profile_medium}} alt="" height="60" width="60">{{club.name}}</li>
+							</ul>				
+						</div>
+					</div>
+					<h2 style="margin-left: 15px">Totals</h2>
 					<table class="table table-striped" style="float: left; width: 40%; margin-left: 15px" class="col-sm-6 col-md-6">
 						<tr>
 							<td><b>This year</b></td>
@@ -207,15 +217,7 @@
 					</table>				
 				</div>
 
-				<div style="clear: both" class="col-xs-12">
-					
-					<h2>Clubs</h2>
-					<div ng-repeat="club in athlete.clubs">			
-						<ul id="clubs">
-							<li><img src={{club.profile_medium}} alt="" height="60" width="60">{{club.name}}</li>
-						</ul>				
-					</div>
-				</div>
+				
 			</div>
 		</div>				
 	</div>
