@@ -2,6 +2,7 @@ Strava Clone
 ==============
 View the demo at https://stravaclone01.herokuapp.com
 --------------
-Basic Strava user and activity viewer
+Strava clone is a basic strava user and activity viewer. The app is authenticted with passport and the strava api calls are made with the recieved access token.
 
-more data to be added
+Node.js, Express.js, Passport.js, EJS, Angular.js, Bootstrap, Strava API, Google maps.
+ 
